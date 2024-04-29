@@ -1,25 +1,18 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react'
+import MyTest from "./myTest/MyTest";
+import Arborist from './package1/Arborist';
+import ReactDndTreeview from './package2/ReactDndTreeview';
+import MyTest2 from './myTest2/MyTest2';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+     return (
+          <>
+               {/* <MyTest /> */}
+               {/* <Arborist /> */}
+               {/* <ReactDndTreeview /> */}
+               <MyTest2 />
+          </>
+     )
 }
 
-export default App;
+export default App
