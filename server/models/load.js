@@ -12,7 +12,7 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
           Load.belongsTo(models.Area, {
             foreignKey: 'areaId',
-            as: 'Area'
+            as: 'Area',
           }); 
      
     }

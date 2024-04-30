@@ -2,8 +2,10 @@ const express = require('express')
 const app = express()
 const port = 3045
 const { Building, Floor, Area, Load } = require('./models');
+const cors = require('cors');
 
 app.use(express.json());
+app.use(cors());
 
 app.get('/', (req, res) => res.send('Hello World!'))
 
@@ -70,26 +72,25 @@ function buildHierarchy(buildings, maxDepth = 15) {
      return buildings;
 }
 
-app.get("/buildings/:id", async (req, res) => {
-     const { id } = req.params;
+app.get("/buildings/:buildingId", async (req, res) => {
+     const { buildingId } = req.params;
      const whereOptions = {};
-     if (id.toLowerCase() !== "all") whereOptions.id = id; // If the ID is not "all", filter by it
+     if (buildingId.toLowerCase() !== "all") whereOptions.id = buildingId;
 
      try {
           const buildings = await Building.findAll({
+               where: whereOptions,
                include: [{
                     model: Floor,
                     as: 'Floors',
                     include: [{
                          model: Area,
                          as: 'Areas',
-                         include: [{
-                              model: Load,
-                              as: 'Loads_Simple'
-                         }],
+                         include: [
+                              { model: Load, as: 'Loads_Simple' },
+                         ],
                     }],
-                    where: whereOptions
-               }]
+               }],
           });
 
           const buildingsData = buildings.map(building => building.toJSON());
